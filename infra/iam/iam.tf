@@ -1,0 +1,20 @@
+resource "aws_iam_policy" "policy" {
+  name        = "segunda_politica"
+  path        = "/"
+  description = "Testando credenciais novas"
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:Describe*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}

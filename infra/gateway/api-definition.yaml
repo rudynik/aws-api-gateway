@@ -1,0 +1,31 @@
+openapi: 3.0.1
+info:
+  title: http-api
+  version: 1.0.0
+paths:
+  /sbti:
+    get:
+      summary: Hello World endpoint
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hello, World!
+      x-amazon-apigateway-integration:
+        type: mock
+        # Aqui definimos a resposta completa da integração mock
+        integrationResponses:
+          default:
+            statusCode: '200'
+            responseTemplates:
+              application/json: |
+                {
+                  "message": "$input.path('$')",
+                  "timestamp": "$context.requestTime"
+                }
